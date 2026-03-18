@@ -12,6 +12,7 @@ permissions:
 jobs:
   build-windows:
     runs-on: windows-latest
+    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,6 +43,9 @@ jobs:
           Copy-Item "$($crtDir.FullName)\*.dll" "build\windows\x64\runner\Release\"
           echo "✓ Copied VC Runtime DLLs from $($crtDir.FullName)"
 
+      - name: Install NSIS
+        run: choco install nsis --no-progress -y
+
       - name: Build NSIS installer
         run: |
           $version = (Select-String -Path pubspec.yaml -Pattern '^version:').Line -replace 'version: ', '' -replace '\+.*', ''
@@ -55,6 +59,7 @@ jobs:
 
   build-macos:
     runs-on: macos-latest
+    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -93,14 +98,16 @@ jobs:
   release:
     needs: [build-windows, build-macos]
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
+    if: always() && startsWith(github.ref, 'refs/tags/') && (needs.build-windows.result == 'success' || needs.build-macos.result == 'success')
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            plasoSmallTool_windows_x64/plasoSmallTool_setup.exe
-            plasoSmallTool_macos_arm64/plasoSmallTool_macos_arm64.dmg
+            plasoSmallTool_setup.exe
+            plasoSmallTool_macos_arm64.dmg
