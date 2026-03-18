@@ -42,15 +42,19 @@ jobs:
           Copy-Item "$($crtDir.FullName)\*.dll" "build\windows\x64\runner\Release\"
           echo "✓ Copied VC Runtime DLLs from $($crtDir.FullName)"
 
-      - name: Package artifacts
+      - name: Build NSIS installer
         run: |
-          Compress-Archive -Path build\windows\x64\runner\Release\* -DestinationPath plasoSmallTool_windows_x64.zip
+          $version = (Select-String -Path pubspec.yaml -Pattern '^version:').Line -replace 'version: ', '' -replace '\+.*', ''
+          $env:APP_VERSION = $version
+          choco install nsis -y
+          cd build\windows\x64\runner
+          makensis /DAPP_VERSION=$version "${{ github.workspace }}\windows\installer.nsi"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: plasoSmallTool_windows_x64
-          path: plasoSmallTool_windows_x64.zip
+          path: build\windows\x64\runner\plasoSmallTool_setup.exe
 
   build-macos:
     runs-on: macos-latest
@@ -69,16 +73,25 @@ jobs:
       - name: Build macOS
         run: flutter build macos --release
 
-      - name: Package artifacts
+      - name: Create DMG
         run: |
-          cd build/macos/Build/Products/Release
-          zip -r "${{ github.workspace }}/plasoSmallTool_macos_arm64.zip" "plasoSmallTool.app"
+          brew install create-dmg
+          create-dmg \
+            --volname "plasoSmallTool" \
+            --window-pos 200 120 \
+            --window-size 600 400 \
+            --icon-size 100 \
+            --icon "plasoSmallTool.app" 150 185 \
+            --hide-extension "plasoSmallTool.app" \
+            --app-drop-link 450 185 \
+            "plasoSmallTool_macos_arm64.dmg" \
+            "build/macos/Build/Products/Release/"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: plasoSmallTool_macos_arm64
-          path: plasoSmallTool_macos_arm64.zip
+          path: plasoSmallTool_macos_arm64.dmg
 
   release:
     needs: [build-windows, build-macos]
@@ -92,5 +105,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            plasoSmallTool_windows_x64/plasoSmallTool_windows_x64.zip
-            plasoSmallTool_macos_arm64/plasoSmallTool_macos_arm64.zip
+            plasoSmallTool_windows_x64/plasoSmallTool_setup.exe
+            plasoSmallTool_macos_arm64/plasoSmallTool_macos_arm64.dmg
