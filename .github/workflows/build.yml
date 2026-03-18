@@ -78,6 +78,8 @@ jobs:
       - name: Create DMG
         run: |
           brew install create-dmg
+          mkdir -p /tmp/dmg_source
+          cp -r "build/macos/Build/Products/Release/plasoSmallTool.app" /tmp/dmg_source/
           create-dmg \
             --volname "plasoSmallTool" \
             --window-pos 200 120 \
@@ -87,7 +89,7 @@ jobs:
             --hide-extension "plasoSmallTool.app" \
             --app-drop-link 450 185 \
             "plasoSmallTool_macos_arm64.dmg" \
-            "build/macos/Build/Products/Release/"
+            "/tmp/dmg_source/"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
