@@ -49,7 +49,8 @@ jobs:
       - name: Build NSIS installer
         run: |
           $version = (Select-String -Path pubspec.yaml -Pattern '^version:').Line -replace 'version: ', '' -replace '\+.*', ''
-          & "C:\Program Files (x86)\NSIS\makensis.exe" /DAPP_VERSION=$version "${{ github.workspace }}\windows\installer.nsi"
+          $buildDir = "${{ github.workspace }}\build\windows\x64\runner\Release"
+          & "C:\Program Files (x86)\NSIS\makensis.exe" /DAPP_VERSION=$version /DBUILD_DIR=$buildDir "${{ github.workspace }}\windows\installer.nsi"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

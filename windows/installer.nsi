@@ -10,7 +10,7 @@ Unicode True
 !define UNINSTALL_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
 
 Name "${APP_NAME} ${APP_VERSION}"
-OutFile "plasoSmallTool_setup.exe"
+OutFile "${BUILD_DIR}\..\plasoSmallTool_setup.exe"
 InstallDir "${INSTALL_DIR}"
 InstallDirRegKey HKLM "${UNINSTALL_KEY}" "InstallLocation"
 RequestExecutionLevel admin
@@ -38,7 +38,7 @@ ShowUnInstDetails show
 Section "主程序" SecMain
   SectionIn RO
   SetOutPath "$INSTDIR"
-  File /r "Release\*.*"
+  File /r "${BUILD_DIR}\*.*"
 
   ; 创建开始菜单快捷方式
   CreateDirectory "$SMPROGRAMS\${APP_NAME}"
