@@ -1,0 +1,81 @@
+{
+  "@@locale": "zh",
+  "appTitle": "伯索小工具",
+  "appSubtitle": "跨平台桌面小工具集",
+  "navDns": "DNS快速切换",
+  "navAbout": "关于",
+  "navCollapse": "收起",
+  "aboutVersion": "版本",
+  "aboutAuthor": "作者",
+  "aboutCheckUpdate": "检查更新",
+  "aboutChecking": "检查中…",
+  "aboutLatest": "最新",
+  "aboutHasUpdate": "有新版本",
+  "aboutCheckFailed": "检查失败",
+  "aboutNewVersion": "发现新版本 v{version}",
+  "@aboutNewVersion": {
+    "placeholders": {
+      "version": { "type": "String" }
+    }
+  },
+  "aboutDownload": "前往下载",
+  "aboutGithub": "GitHub 开源地址",
+  "aboutAppearance": "外观",
+  "themeLight": "明亮",
+  "themeAuto": "自动",
+  "themeDark": "暗黑",
+  "language": "语言",
+  "langZh": "中文",
+  "langEn": "English",
+  "dnsPageTitle": "DNS 检测与切换",
+  "dnsHelp": "选择网络接口后，点击预设卡片即可快速切换 DNS",
+  "dnsHelpTooltip": "帮助",
+  "dnsNetworkInterface": "网络接口",
+  "dnsRefreshTooltip": "刷新",
+  "dnsCurrentDns": "当前 DNS",
+  "dnsNoInterface": "未找到网络接口",
+  "dnsInterfaceError": "错误: {error}",
+  "@dnsInterfaceError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "dnsNoneSet": "未设置 DNS（使用系统默认）",
+  "dnsGetFailed": "获取失败: {error}",
+  "@dnsGetFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "dnsPresets": "快速切换预设",
+  "dnsActive": "已激活",
+  "dnsSwitch": "切换",
+  "dnsSwitchSuccess": "DNS 切换成功",
+  "dnsSelectInterface": "请先选择网络接口",
+  "dnsNeedAdmin": "需要管理员权限，请以管理员身份运行应用",
+  "dnsSwitchFailed": "切换失败",
+  "dnsSwitchFailedWithError": "切换失败: {error}",
+  "@dnsSwitchFailedWithError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "dnsLoadFailed": "加载失败: {error}",
+  "@dnsLoadFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "dnsPresetAliName": "阿里 DNS",
+  "dnsPresetAliDesc": "国内优化，快速稳定",
+  "dnsPresetTencentName": "腾讯 DNS",
+  "dnsPresetTencentDesc": "国内优化，DNSPod 提供",
+  "dnsPresetGoogleName": "Google DNS",
+  "dnsPresetGoogleDesc": "全球可靠，隐私保护",
+  "dnsPresetCloudflareName": "Cloudflare",
+  "dnsPresetCloudflareDesc": "最快的公共 DNS",
+  "dnsPreset114Name": "114 DNS",
+  "dnsPreset114Desc": "国内常用 DNS",
+  "dnsPresetAutoName": "自动(DHCP)",
+  "dnsPresetAutoDesc": "恢复自动获取"
+}

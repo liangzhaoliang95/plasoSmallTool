@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../providers/dns_provider.dart';
 import 'interface_selector.dart';
 
@@ -12,6 +13,7 @@ class CurrentDnsPanel extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentDnsAsync = ref.watch(currentDnsProvider);
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
 
     return Card(
       child: Padding(
@@ -21,14 +23,11 @@ class CurrentDnsPanel extends ConsumerWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.network_check,
-                  size: 20,
-                  color: theme.colorScheme.primary,
-                ),
+                Icon(Icons.network_check,
+                    size: 20, color: theme.colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
-                  '网络接口',
+                  l10n.dnsNetworkInterface,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -40,7 +39,7 @@ class CurrentDnsPanel extends ConsumerWidget {
                 IconButton.filled(
                   icon: const Icon(Icons.refresh, size: 20),
                   onPressed: onRefresh,
-                  tooltip: '刷新',
+                  tooltip: l10n.dnsRefreshTooltip,
                   style: IconButton.styleFrom(
                     backgroundColor: theme.colorScheme.primaryContainer,
                     foregroundColor: theme.colorScheme.onPrimaryContainer,
@@ -53,14 +52,10 @@ class CurrentDnsPanel extends ConsumerWidget {
             const SizedBox(height: 16),
             Row(
               children: [
-                Icon(
-                  Icons.dns,
-                  size: 20,
-                  color: theme.colorScheme.primary,
-                ),
+                Icon(Icons.dns, size: 20, color: theme.colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
-                  '当前 DNS',
+                  l10n.dnsCurrentDns,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -81,70 +76,49 @@ class CurrentDnsPanel extends ConsumerWidget {
                     ),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.info_outline,
-                          color: theme.colorScheme.onSecondaryContainer,
-                          size: 20,
-                        ),
+                        Icon(Icons.info_outline,
+                            color: theme.colorScheme.onSecondaryContainer,
+                            size: 20),
                         const SizedBox(width: 12),
-                        Expanded(
-                          child: Text(
-                            '自动获取 (DHCP)',
-                            style: TextStyle(
-                              color: theme.colorScheme.onSecondaryContainer,
-                              fontWeight: FontWeight.w500,
-                            ),
+                        Text(
+                          l10n.dnsNoneSet,
+                          style: TextStyle(
+                            color: theme.colorScheme.onSecondaryContainer,
                           ),
                         ),
                       ],
                     ),
                   );
                 }
-                return Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.primaryContainer.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: theme.colorScheme.primary.withOpacity(0.3),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: dns.map((server) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.circle,
-                              size: 8,
-                              color: theme.colorScheme.primary,
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
+                return Column(
+                  children: dns
+                      .map((server) => Padding(
+                            padding: const EdgeInsets.only(bottom: 8),
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 12),
+                              decoration: BoxDecoration(
+                                color: theme.colorScheme.surfaceContainerLow,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: theme.colorScheme.outlineVariant,
+                                ),
+                              ),
                               child: Text(
                                 server,
                                 style: TextStyle(
-                                  color: theme.colorScheme.onSurface,
-                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'monospace',
                                   fontSize: 14,
+                                  color: theme.colorScheme.onSurface,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      );
-                    }).toList(),
-                  ),
+                          ))
+                      .toList(),
                 );
               },
-              loading: () => const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: CircularProgressIndicator(),
-                ),
-              ),
+              loading: () => const Center(child: CircularProgressIndicator()),
               error: (error, stack) => Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -153,18 +127,14 @@ class CurrentDnsPanel extends ConsumerWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.error_outline,
-                      color: theme.colorScheme.onErrorContainer,
-                      size: 20,
-                    ),
+                    Icon(Icons.error_outline,
+                        color: theme.colorScheme.onErrorContainer, size: 20),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        '获取失败: $error',
+                        l10n.dnsGetFailed(error.toString()),
                         style: TextStyle(
-                          color: theme.colorScheme.onErrorContainer,
-                        ),
+                            color: theme.colorScheme.onErrorContainer),
                       ),
                     ),
                   ],

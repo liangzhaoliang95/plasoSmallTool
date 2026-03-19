@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../providers/dns_provider.dart';
 
 class InterfaceSelector extends ConsumerWidget {
@@ -11,10 +12,12 @@ class InterfaceSelector extends ConsumerWidget {
     final selectedInterface = ref.watch(selectedInterfaceProvider);
     final theme = Theme.of(context);
 
+    final l10n = AppLocalizations.of(context);
+
     return interfacesAsync.when(
       data: (interfaces) {
         if (interfaces.isEmpty) {
-          return const Text('未找到网络接口');
+          return Text(l10n.dnsNoInterface);
         }
 
         if (selectedInterface == null && interfaces.isNotEmpty) {
@@ -72,7 +75,7 @@ class InterfaceSelector extends ConsumerWidget {
         );
       },
       loading: () => const CircularProgressIndicator(),
-      error: (error, stack) => Text('错误: $error'),
+      error: (error, stack) => Text(l10n.dnsInterfaceError(error.toString())),
     );
   }
 }

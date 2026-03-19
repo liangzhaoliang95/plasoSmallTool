@@ -1,0 +1,81 @@
+{
+  "@@locale": "en",
+  "appTitle": "Plaso Small Tool",
+  "appSubtitle": "Cross-platform desktop toolkit",
+  "navDns": "DNS Switcher",
+  "navAbout": "About",
+  "navCollapse": "Collapse",
+  "aboutVersion": "Version",
+  "aboutAuthor": "Author",
+  "aboutCheckUpdate": "Check Update",
+  "aboutChecking": "Checking…",
+  "aboutLatest": "Latest",
+  "aboutHasUpdate": "Update Available",
+  "aboutCheckFailed": "Check Failed",
+  "aboutNewVersion": "New version v{version} available",
+  "@aboutNewVersion": {
+    "placeholders": {
+      "version": { "type": "String" }
+    }
+  },
+  "aboutDownload": "Download",
+  "aboutGithub": "GitHub Repository",
+  "aboutAppearance": "Appearance",
+  "themeLight": "Light",
+  "themeAuto": "Auto",
+  "themeDark": "Dark",
+  "language": "Language",
+  "langZh": "中文",
+  "langEn": "English",
+  "dnsPageTitle": "DNS Detection & Switch",
+  "dnsHelp": "Select a network interface, then tap a preset card to switch DNS",
+  "dnsHelpTooltip": "Help",
+  "dnsNetworkInterface": "Network Interface",
+  "dnsRefreshTooltip": "Refresh",
+  "dnsCurrentDns": "Current DNS",
+  "dnsNoInterface": "No network interface found",
+  "dnsInterfaceError": "Error: {error}",
+  "@dnsInterfaceError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "dnsNoneSet": "No DNS set (using system default)",
+  "dnsGetFailed": "Failed to get DNS: {error}",
+  "@dnsGetFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "dnsPresets": "Quick Switch Presets",
+  "dnsActive": "Active",
+  "dnsSwitch": "Switch",
+  "dnsSwitchSuccess": "DNS switched successfully",
+  "dnsSelectInterface": "Please select a network interface first",
+  "dnsNeedAdmin": "Administrator privileges required, please run as administrator",
+  "dnsSwitchFailed": "Switch failed",
+  "dnsSwitchFailedWithError": "Switch failed: {error}",
+  "@dnsSwitchFailedWithError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "dnsLoadFailed": "Load failed: {error}",
+  "@dnsLoadFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "dnsPresetAliName": "Ali DNS",
+  "dnsPresetAliDesc": "China optimized, fast & stable",
+  "dnsPresetTencentName": "Tencent DNS",
+  "dnsPresetTencentDesc": "China optimized, powered by DNSPod",
+  "dnsPresetGoogleName": "Google DNS",
+  "dnsPresetGoogleDesc": "Globally reliable, privacy focused",
+  "dnsPresetCloudflareName": "Cloudflare",
+  "dnsPresetCloudflareDesc": "Fastest public DNS",
+  "dnsPreset114Name": "114 DNS",
+  "dnsPreset114Desc": "Popular DNS in China",
+  "dnsPresetAutoName": "Auto (DHCP)",
+  "dnsPresetAutoDesc": "Restore automatic DNS"
+}

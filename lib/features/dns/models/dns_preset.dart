@@ -4,12 +4,16 @@ class DnsPreset {
   final String secondary;
   final String description;
   final bool isAuto;
+  final String nameKey;
+  final String descriptionKey;
 
   const DnsPreset({
     required this.name,
     required this.primary,
     required this.secondary,
     required this.description,
+    required this.nameKey,
+    required this.descriptionKey,
     this.isAuto = false,
   });
 

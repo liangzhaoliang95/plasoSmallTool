@@ -1,6 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../models/dns_preset.dart';
+
+String _resolveKey(AppLocalizations l10n, String key) => switch (key) {
+      'dnsPresetAliName' => l10n.dnsPresetAliName,
+      'dnsPresetAliDesc' => l10n.dnsPresetAliDesc,
+      'dnsPresetTencentName' => l10n.dnsPresetTencentName,
+      'dnsPresetTencentDesc' => l10n.dnsPresetTencentDesc,
+      'dnsPresetGoogleName' => l10n.dnsPresetGoogleName,
+      'dnsPresetGoogleDesc' => l10n.dnsPresetGoogleDesc,
+      'dnsPresetCloudflareName' => l10n.dnsPresetCloudflareName,
+      'dnsPresetCloudflareDesc' => l10n.dnsPresetCloudflareDesc,
+      'dnsPreset114Name' => l10n.dnsPreset114Name,
+      'dnsPreset114Desc' => l10n.dnsPreset114Desc,
+      'dnsPresetAutoName' => l10n.dnsPresetAutoName,
+      'dnsPresetAutoDesc' => l10n.dnsPresetAutoDesc,
+      _ => key,
+    };
 
 class DnsPresetCard extends ConsumerWidget {
   final DnsPreset preset;
@@ -19,6 +36,7 @@ class DnsPresetCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
@@ -49,7 +67,7 @@ class DnsPresetCard extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        preset.name,
+                        _resolveKey(l10n, preset.nameKey),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -154,7 +172,7 @@ class DnsPresetCard extends ConsumerWidget {
                 ],
                 const SizedBox(height: 8),
                 Text(
-                  preset.description,
+                  _resolveKey(l10n, preset.descriptionKey),
                   style: TextStyle(
                     color: theme.colorScheme.onSurfaceVariant,
                     fontSize: 11,
@@ -195,7 +213,7 @@ class DnsPresetCard extends ConsumerWidget {
                               ),
                               const SizedBox(width: 6),
                               Text(
-                                isActive ? '已激活' : '切换',
+                                isActive ? l10n.dnsActive : l10n.dnsSwitch,
                                 style: const TextStyle(fontSize: 13),
                               ),
                             ],
