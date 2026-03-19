@@ -15,6 +15,10 @@ Visit the [Releases](https://github.com/liangzhaoliang95/plasoSmallTool/releases
 | macOS (arm64 / x86_64) | `plasoSmallTool_macos_arm64.dmg` |
 | Windows x64 | `plasoSmallTool_setup.exe` |
 
+## Screenshots
+
+![DNS Tool](./docs/image/dnsTool.png)
+
 ## Features
 
 ### DNS Tool

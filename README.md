@@ -15,6 +15,10 @@
 | macOS (arm64 / x86_64) | `plasoSmallTool_macos_arm64.dmg` |
 | Windows x64 | `plasoSmallTool_setup.exe` |
 
+## 截图
+
+![DNS 工具](./docs/image/dnsTool.png)
+
 ## 功能
 
 ### DNS 工具
