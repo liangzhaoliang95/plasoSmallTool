@@ -39,7 +39,13 @@ class UpdateNotifier extends Notifier<UpdateState> {
 
   @override
   UpdateState build() {
+    _loadCurrentVersion();
     return const UpdateState(status: UpdateStatus.idle);
+  }
+
+  Future<void> _loadCurrentVersion() async {
+    final info = await PackageInfo.fromPlatform();
+    state = state.copyWith(currentVersion: info.version);
   }
 
   Future<void> checkForUpdate() async {
