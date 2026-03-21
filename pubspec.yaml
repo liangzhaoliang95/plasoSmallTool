@@ -48,6 +48,7 @@ dependencies:
 
   # 窗口管理
   window_manager: ^0.4.3
+  screen_retriever: ^0.2.0
 
   # 本地存储
   shared_preferences: ^2.3.2
